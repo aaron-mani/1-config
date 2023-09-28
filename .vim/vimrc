@@ -1,0 +1,187 @@
+set nocompatible
+set tabstop=2
+set shiftwidth=2
+set expandtab
+set autoindent
+set smartindent
+set background=dark
+set hlsearch
+set showmatch
+set number
+set relativenumber
+set listchars=tab:>-,trail:~
+set list
+filetype plugin on
+
+" turn syntax highlighting on
+let python_highlight_all=1
+syntax on
+
+" enable mouse
+set mouse=a
+
+" color scheme configuration
+set t_Co=256
+colorscheme wombat256
+
+" set vertical line at column 80
+set colorcolumn=80
+highlight ColorColumn ctermbg=8 guibg=lightgrey
+
+set ruler
+set encoding=utf-8
+
+" show the (partial) command being typed
+set showcmd
+
+" leader key
+" let mapleader=","
+
+" ----------------------------------------------------------------------------
+" plugin code that vim-plug uses
+call plug#begin('~/.vim/plugged')
+
+" Make sure you use single quotes
+
+" Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
+Plug 'junegunn/vim-easy-align'
+
+" Any valid git URL is allowed
+Plug 'https://github.com/junegunn/vim-github-dashboard.git'
+Plug 'https://github.com/tpope/vim-surround.git'
+
+" Group dependencies, vim-snippets depends on ultisnips
+" Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+
+" On-demand loading
+" Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+" Filesystem explorer
+Plug 'preservim/nerdtree'
+
+" Makes NERDTree feel like a true panel, independent of tabs
+Plug 'jistr/vim-nerdtree-tabs'
+let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
+
+Plug 'scrooloose/nerdcommenter'
+
+" Add spaces after comment delimiters by default
+let NERDSpaceDelims = 1
+
+" Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
+
+" Using a non-master branch
+" Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
+
+" Using a tagged release; wildcard allowed (requires git 1.9.2 or above)
+" Plug 'fatih/vim-go', { 'tag': '*' }
+
+" Plugin options
+" Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
+
+" Plugin outside ~/.vim/plugged with post-update hook
+" Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+
+" Unmanaged plugin (manually installed and updated)
+" Plug '~/my-prototype-plugin'
+
+
+" Used to display thin vertical lines at each indentation level.
+let g:indentLine_color_term = 239
+" let g:indentLine_char = '┆'
+" let g:indentLine_char = '¦'
+let g:indentLine_char = '|'
+Plug 'Yggdroot/indentLine'
+
+" Make vim movement easier
+" <Leader><Leader> w    -   shows unique keys to diff positions
+" <Leader><Leader> fo   -   similar to find char, shows unique keys for all
+" words starting with 'o'
+Plug 'easymotion/vim-easymotion'
+
+" Automatic closing of quotes, parentheses, brackets etc.
+" Plug 'Raimondi/delimitMate'
+
+" Plug 'Townk/vim-autoclose'
+
+" Indentation script for python PEP8 standard
+Plug 'vim-scripts/indentpython.vim'
+
+" Check syntax on each save
+" Plug 'scrooloose/syntastic'
+Plug 'vim-syntastic/syntastic'
+
+" Check PEP8 syntax
+Plug 'nvie/vim-flake8'
+
+" Code completion
+" let g:ycm_enable_semantic_highlighting=1
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+" Close auto-complete window after you're done with it
+let g:ycm_autoclose_preview_window_after_completion=1
+map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+" Fuzzy searching
+Plug 'ctrlpvim/ctrlp.vim'
+
+" Status line
+Plug 'powerline/powerline'
+
+" Add plugins to &runtimepath
+call plug#end()
+" ----------------------------------------------------------------------------
+
+
+
+" ----------------------------------------------------------------------------
+" MY KEY MAPPINGS
+
+" better window navigation
+set splitright
+set splitbelow
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
+
+" remap <escape> key for exiting insert mode.
+inoremap jk <Esc>
+inoremap kj <Esc>
+
+" the below setting conflicts with remapping the <Esc> key>
+" set paste
+
+" deactivate <Esc> to exit insert mode.
+inoremap <Esc> <nop>
+
+" make arrow keys work in INSERT mode (TODO: figure out why this really
+" happens)
+imap <ESC>oA <ESC>ki
+imap <ESC>oB <ESC>ji
+imap <ESC>oC <ESC>li
+imap <ESC>oD <ESC>hi
+
+" insert a closing brace in the new line and place cursor in between
+inoremap {<CR> {<CR>}<C-o>O
+
+" ----------------------------------------------------------------------------
+
+" Python files PEP8 indentation
+" https://realpython.com/vim-and-python-a-match-made-in-heaven/
+au BufNewFile,BufRead *.py
+    \ set tabstop=4
+    \ softtabstop=4
+    \ shiftwidth=4
+    \ textwidth=79
+    \ expandtab
+    " \ autoindent
+    \ fileformat=unix
+
+" Java/html/css files indentation
+au BufNewFile,BufRead *.js, *.html, *.css
+    \ set tabstop=2
+    \ softtabstop=2
+    \ shiftwidth=2
+
+" Flag unnecessary whitespaces
+highlight BadWhitespace ctermbg=red guibg=darkred
+au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
