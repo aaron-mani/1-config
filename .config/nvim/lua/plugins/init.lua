@@ -1,4 +1,5 @@
 return {
   "nvim-lua/plenary.nvim", -- lua functions that many plugins use
-  "christoomey/vim-tmux-navigator", -- tmux & split window navigation
+  -- "christoomey/vim-tmux-navigator", -- tmux & split window navigation
+  "aserowy/tmux.nvim", -- nvim/tmux split navigator and resizing
 }

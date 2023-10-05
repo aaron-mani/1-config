@@ -120,8 +120,7 @@ fi
 alias vshell="cat $HOME/.bashrc"
 alias eshell="vim $HOME/.bashrc"
 alias sshell="source $HOME/.bashrc"
-alias vimrc="vim $HOME/.vim/vimrc"
-alias tmuxrc="nvim $HOME/.tmux.conf"
+alias etmux="nvim $HOME/.tmux.conf"
 
 #Generic commands
 alias tmux="tmux -u"

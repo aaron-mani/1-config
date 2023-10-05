@@ -1,3 +1,6 @@
+-- set leader key space
+vim.g.mapleader = " "
+
 local opt = vim.opt
 
 vim.wo.signcolumn = "yes" -- keep signcolumn on by default
@@ -5,7 +8,7 @@ vim.wo.signcolumn = "yes" -- keep signcolumn on by default
 -- Case-insensitive searching UNLESS \C or capital in search
 opt.ignorecase = true -- ignore case 
 opt.smartcase = true -- ignore case when pattern contains lowercase letters only
-opt.timeoutlen = 299 -- time in ms to wait for a mapped sequence to complete
+-- opt.timeoutlen = 299 -- time in ms to wait for a mapped sequence to complete
 opt.updatetime = 250 -- time in ms to wait until swap file is written to disk 
 opt.number = true -- make line numbers default
 opt.mouse = "a" -- enable mouse mode
