@@ -1,21 +1,18 @@
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
-
 local opt = vim.opt
 
--- Case-insensitive searching UNLESS \C or capital in search
-opt.ignorecase = true
-opt.smartcase = true
+vim.wo.signcolumn = "yes" -- keep signcolumn on by default
 
-opt.timeoutlen = 299
-opt.updatetime = 250 -- Decrease update time
-opt.number = true -- Make line numbers default
-opt.mouse = "a" -- Enable mouse mode
-opt.clipboard:append("unnamedplus") -- Sync clipboard between OS and Neovim
-opt.breakindent = true -- Enable break indent
-opt.undofile = true -- Save undo history
-vim.wo.signcolumn = "yes" -- Keep signcolumn on by default
-opt.completeopt = "menuone,noselect" -- Better completion experience
+-- Case-insensitive searching UNLESS \C or capital in search
+opt.ignorecase = true -- ignore case 
+opt.smartcase = true -- ignore case when pattern contains lowercase letters only
+opt.timeoutlen = 299 -- time in ms to wait for a mapped sequence to complete
+opt.updatetime = 250 -- time in ms to wait until swap file is written to disk 
+opt.number = true -- make line numbers default
+opt.mouse = "a" -- enable mouse mode
+opt.clipboard:append("unnamedplus") -- sync clipboard between OS and Neovim
+opt.breakindent = true -- enable break indent
+opt.undofile = true -- save undo history
+opt.completeopt = "menuone,noselect" -- better completion experience
 opt.termguicolors = true
 opt.backspace = "indent,eol,start"
 opt.showcmd = true
