@@ -36,7 +36,7 @@ glogr() {
 
 # repo for dotfiles
 # https://www.atlassian.com/git/tutorials/dotfiles
-alias config='/usr/bin/git --git-dir=/home/ubuntu/1-config/ --work-tree=/home/ubuntu'
+alias config='/usr/bin/git --git-dir=$HOME/1-config/ --work-tree=$HOME'
 
 #Directories
 alias cdsdm="cd $HOME/0-workspace/sdmain/"
