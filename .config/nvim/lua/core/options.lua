@@ -37,3 +37,4 @@ opt.swapfile = false -- disable swap files
 opt.wrap = false -- wraps long lines of text to fit the screen 
 opt.iskeyword:append("-")       
 opt.showmode = false -- for lualine
+opt.colorcolumn = "81"
