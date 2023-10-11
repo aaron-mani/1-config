@@ -37,6 +37,9 @@ glogr() {
 # repo for dotfiles
 # https://www.atlassian.com/git/tutorials/dotfiles
 alias config='/usr/bin/git --git-dir=$HOME/1-config/ --work-tree=$HOME'
+alias cstatus="/usr/bin/git --git-dir=$HOME/1-config/ --work-tree=$HOME status"
+alias cdiff="/usr/bin/git --git-dir=$HOME/1-config/ --work-tree=$HOME diff"
+alias cadd="/usr/bin/git --git-dir=$HOME/1-config/ --work-tree=$HOME add -u ."
 alias cupdate="/usr/bin/git --git-dir=$HOME/1-config/ --work-tree=$HOME remote update"
 alias cpull="/usr/bin/git --git-dir=$HOME/1-config/ --work-tree=$HOME remote update; git pull"
 
