@@ -115,3 +115,8 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+# $path exports
+# lua
+export PATH=$PATH:/home/linuxbrew/.linuxbrew/Cellar/lua-language-server/3.7.0/bin
+
