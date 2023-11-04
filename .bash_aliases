@@ -20,30 +20,48 @@ export TMOUT=
 alias gupdate="git remote update"
 alias gpull="git remote update; git pull"
 
-# $1 = Number of entries to fetch
-# $2 = /path/to/location
 glog() {
+  commits="10" # default # commits to display
+  branch="remotes/origin/master" # default git branch
+  location="." # default project path
+  reports=false
+  OPTIND=1
+
+  while getopts "hrc:b:l:" option; do
+    case "${option}" in
+      h) # display help
+        echo "Usage: $0 [-h] [-r] [-c commits] [-b branch] [-l location]" >&2
+        return;;
+      r) # filter reports team specific commits only
+        reports=true
+        commits="1000";;
+      c)
+        commits=${OPTARG};;
+      b)
+        branch=${OPTARG};;
+      l)
+        location=${OPTARG};;
+      *)
+        echo "Invalid arg! Usage: $0 [-h] [-r] [-c commits] [-b branch] [-l location]" >&2
+        return;;
+    esac
+  done
+
+  if $reports; then
     git log --color=always \
-        --pretty=format:"%C(Yellow)%cd%Creset %Cred%h%Creset %Cgreen%<(50)%ae%Creset %s" \
-        -n "$1" "$2"
-}
-glogr() {
-    git log --color=always \
-        --pretty=format:"%C(Yellow)%cd%Creset %Cred%h%Creset %Cgreen%<(50)%ae%Creset %s" \
-        -n "$1" "$2" \
-        | egrep -i "bowen.lei|zhebin.zhang|dhananjay.mantri|hy.nguyen|swati.sapar|sean.kung"
+      --pretty=format:"%C(Yellow)%cd%Creset %Cred%h%Creset %Cgreen%<(50)%ae%Creset %s" \
+      -n "$commits" "$branch" -- "$location" \
+      | egrep -i "bowen.lei|zhebin.zhang|dhananjay.mantri|hy.nguyen|swati.sapar|sean.kung"
+    else
+      git log --color=always \
+      --pretty=format:"%C(Yellow)%cd%Creset %Cred%h%Creset %Cgreen%<(50)%ae%Creset %s" \
+      -n "$commits" "$branch" -- "$location"
+  fi
 }
 
 # repo for dotfiles
 # https://www.atlassian.com/git/tutorials/dotfiles
-alias config='/usr/bin/git --git-dir=$HOME/1-config/ --work-tree=$HOME'
-alias cstatus="/usr/bin/git --git-dir=$HOME/1-config/ --work-tree=$HOME status"
-alias cdiff="/usr/bin/git --git-dir=$HOME/1-config/ --work-tree=$HOME diff"
-alias cadd="/usr/bin/git --git-dir=$HOME/1-config/ --work-tree=$HOME add -u ."
-alias ccommit="/usr/bin/git --git-dir=$HOME/1-config/ --work-tree=$HOME commit -m $1" 
-alias cpush="/usr/bin/git --git-dir=$HOME/1-config/ --work-tree=$HOME push" 
-alias cupdate="/usr/bin/git --git-dir=$HOME/1-config/ --work-tree=$HOME remote update"
-alias cpull="/usr/bin/git --git-dir=$HOME/1-config/ --work-tree=$HOME remote update; git pull"
+alias cgit='/usr/bin/git --git-dir=$HOME/1-config/ --work-tree=$HOME'
 
 #Directories
 alias cdsdm="cd $HOME/0-workspace/sdmain/"
