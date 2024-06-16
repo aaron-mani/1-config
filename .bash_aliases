@@ -22,40 +22,52 @@ alias gpull="git remote update; git pull"
 
 glog() {
   commits="10" # default # commits to display
-  branch="remotes/origin/master" # default git branch
-  location="." # default project path
+  remotes="remotes/origin"
+  branch="$remotes/master" # default git branch
+  dir="." # default project directory path
   reports=false
   OPTIND=1
 
-  while getopts "hrc:b:l:" option; do
+  while getopts "hrc:b:d:" option; do
     case "${option}" in
       h) # display help
-        echo "Usage: $0 [-h] [-r] [-c commits] [-b branch] [-l location]" >&2
+        echo "Usage: $0 [-h] [-r{c=5000}] [-c commits{10}] [-b branch{master}[..branch]] [-d directory{.}]" >&2
         return;;
       r) # filter reports team specific commits only
         reports=true
-        commits="1000";;
-      c)
+        commits="5000";;
+      c) # number of commits to display
         commits=${OPTARG};;
-      b)
-        branch=${OPTARG};;
-      l)
-        location=${OPTARG};;
+      b) # get commit log for a specific branch or commit diff between branches
+        # echo "Parsing $OPTARG"
+        if [[ ${OPTARG} =~ (.+)".."(.+) ]]; then
+          echo "Branches found"
+          branch1="$remotes/${BASH_REMATCH[1]}"
+          branch2="$remotes/${BASH_REMATCH[2]}"
+          branch="$branch1..$branch2"
+        else
+          # echo "Branches not found"
+          branch="$remotes/${OPTARG}"
+        fi
+        # echo "Parsed branch: $branch"
+        ;;
+      d) # directory path
+        dir=${OPTARG};;
       *)
-        echo "Invalid arg! Usage: $0 [-h] [-r] [-c commits] [-b branch] [-l location]" >&2
+        echo "Invalid arg! Usage: $0 [-h] [-r] [-c commits] [-b branch] [-d dir]" >&2
         return;;
     esac
   done
 
   if $reports; then
     git log --color=always \
-      --pretty=format:"%C(Yellow)%cd%Creset %Cred%h%Creset %Cgreen%<(50)%ae%Creset %s" \
-      -n "$commits" "$branch" -- "$location" \
-      | egrep -i "bowen.lei|zhebin.zhang|dhananjay.mantri|hy.nguyen|swati.sapar|sean.kung"
+      --pretty=format:"%C(Yellow)%cd%Creset %Cgreen%h%Creset %<(50)%ae %s" \
+      -n "$commits" "$branch" -- "$dir" \
+      | egrep -i "bowen.lei|zhebin.zhang|rahul.bhardwaj|hy.nguyen|swati.sapar|sean.kung"
     else
       git log --color=always \
       --pretty=format:"%C(Yellow)%cd%Creset %Cred%h%Creset %Cgreen%<(50)%ae%Creset %s" \
-      -n "$commits" "$branch" -- "$location"
+      -n "$commits" "$branch" -- "$dir"
   fi
 }
 
