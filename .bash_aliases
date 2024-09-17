@@ -89,13 +89,6 @@ glog() {
   else
     #git log --color=always \
     git log \
-  if $reports; then
-    git log --color=always \
-      --pretty=format:"%C(Yellow)%cd%Creset %Cgreen%h%Creset %<(50)%ae %s" \
-      -n "$commits" "$branch" -- "$dir" \
-      | egrep -i "bowen.lei|zhebin.zhang|rahul.bhardwaj|hy.nguyen|swati.sapar|sean.kung"
-    else
-      git log --color=always \
       --pretty=format:"%C(Yellow)%cd%Creset %Cred%h%Creset %Cgreen%<(50)%ae%Creset %s" \
       -n "$commits" "$branch" -- "$dir"
   fi
