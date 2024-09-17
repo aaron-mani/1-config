@@ -35,10 +35,6 @@ glog() {
     case "${option}" in
       h) # display help
         echo "Usage: $0 [-h] [-r{c=5000}] [-e{c=5000}] [-c commits{10}] [-b branch{master}[..branch]] [-d directory{.}]" >&2
-  while getopts "hrc:b:d:" option; do
-    case "${option}" in
-      h) # display help
-        echo "Usage: $0 [-h] [-r{c=5000}] [-c commits{10}] [-b branch{master}[..branch]] [-d directory{.}]" >&2
         return;;
       r) # filter reports team specific commits only
         reports=true
@@ -50,7 +46,7 @@ glog() {
         commits=${OPTARG};;
       b) # get commit log for a specific branch or commit diff between branches
         # echo "Parsing $OPTARG"
-        if [[ ${OPTARG} =~ (.+)".."(.+) ]]; then
+        if [[ ${OPTARG} =~ (.+)"\.\."(.+) ]]; then
           echo "Branches found"
           branch1="$remotes/${BASH_REMATCH[1]}"
           branch2="$remotes/${BASH_REMATCH[2]}"
