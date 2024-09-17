@@ -25,36 +25,27 @@ glog() {
   remotes="remotes/origin"
   branch="$remotes/master" # default git branch
   dir="." # default project directory path
-<<<<<<< HEAD
   reports_team="bowen.lei|zhebin.zhang|rahul.bhardwaj|hy.nguyen|siddhant.sorann|siddhant-rbrk|swati.sapar|sean.kung"
   events_team="naimish.viradia|archit.gupta|srivardhan.annam|jordan.barkley|noah.solomon"
-=======
->>>>>>> cf589ae32603f06f7e30d875a108b14c6e422c87
   reports=false
   events=false
   OPTIND=1
 
-<<<<<<< HEAD
   while getopts "hrec:b:d:" option; do
     case "${option}" in
       h) # display help
         echo "Usage: $0 [-h] [-r{c=5000}] [-e{c=5000}] [-c commits{10}] [-b branch{master}[..branch]] [-d directory{.}]" >&2
-=======
   while getopts "hrc:b:d:" option; do
     case "${option}" in
       h) # display help
         echo "Usage: $0 [-h] [-r{c=5000}] [-c commits{10}] [-b branch{master}[..branch]] [-d directory{.}]" >&2
->>>>>>> cf589ae32603f06f7e30d875a108b14c6e422c87
         return;;
       r) # filter reports team specific commits only
         reports=true
         commits="5000";;
-<<<<<<< HEAD
       e) # filter events team specific commits only
         events=true
         commits="5000";;
-=======
->>>>>>> cf589ae32603f06f7e30d875a108b14c6e422c87
       c) # number of commits to display
         commits=${OPTARG};;
       b) # get commit log for a specific branch or commit diff between branches
@@ -78,7 +69,6 @@ glog() {
     esac
   done
 
-<<<<<<< HEAD
   if $reports && $events; then
     git log \
       --pretty=format:"%C(Yellow)%cd%Creset %Cgreen%h%Creset %<(50)%ae %s" \
@@ -99,7 +89,6 @@ glog() {
   else
     #git log --color=always \
     git log \
-=======
   if $reports; then
     git log --color=always \
       --pretty=format:"%C(Yellow)%cd%Creset %Cgreen%h%Creset %<(50)%ae %s" \
@@ -107,7 +96,6 @@ glog() {
       | egrep -i "bowen.lei|zhebin.zhang|rahul.bhardwaj|hy.nguyen|swati.sapar|sean.kung"
     else
       git log --color=always \
->>>>>>> cf589ae32603f06f7e30d875a108b14c6e422c87
       --pretty=format:"%C(Yellow)%cd%Creset %Cred%h%Creset %Cgreen%<(50)%ae%Creset %s" \
       -n "$commits" "$branch" -- "$dir"
   fi
