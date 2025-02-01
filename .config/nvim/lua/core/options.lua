@@ -37,3 +37,4 @@ opt.wrap = false -- wraps long lines of text to fit the screen
 opt.iskeyword:append("-")       
 opt.showmode = false -- for lualine
 opt.colorcolumn = "81"
+opt.timeoutlen = 250 -- faster timeout for better-escape plugin
