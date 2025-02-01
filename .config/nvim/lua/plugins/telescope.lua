@@ -1,9 +1,10 @@
 return {
-  "nvim-telescope/telescope.nvim", tag = "0.1.3",
+  "nvim-telescope/telescope.nvim", tag = "0.1.8",
   branch = "0.1.x",
   dependencies = {
     "nvim-lua/plenary.nvim",
-    { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+    -- { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+    -- { "nvim-telescope/telescope-fzf-native.nvim", build = "make -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release" },
     "nvim-tree/nvim-web-devicons",
   },
   config = function()
@@ -21,6 +22,7 @@ return {
           -- },
         },
       },
+      --[[
       extensions = {
         fzf = {
           fuzzy = true,
@@ -29,8 +31,9 @@ return {
           case_mode = "smart_case",
         },
       },
+      ]]
     })
 
-    telescope.load_extension("fzf")
-  end, 
+    -- telescope.load_extension("fzf")
+  end,
 }

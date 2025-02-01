@@ -1,7 +1,7 @@
 # shell shortcuts
-alias vshell="cat $HOME/.bash_aliases"
-alias eshell="nvim $HOME/.bash_aliases"
-alias sshell="source $HOME/.bash_aliases"
+alias vbash="cat $HOME/.bash_aliases"
+alias ebash="nvim $HOME/.bash_aliases"
+alias sbash="source $HOME/.bash_aliases"
 alias vimrc="nvim $HOME/.vim/vimrc"
 alias etmux="nvim $HOME/.tmux.conf"
 

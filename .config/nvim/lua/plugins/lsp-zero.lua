@@ -36,10 +36,11 @@ return {
     require('mason-lspconfig').setup({
       -- Replace the language servers listed here 
       -- with the ones you want to install
-      ensure_installed = {'tsserver',
-        'pyright',
-        'lua_ls',
-        'gopls',
+      ensure_installed = {
+        -- 'tsserver',
+        -- 'pyright',
+        -- 'lua_ls',
+        -- 'gopls',
         -- 'scalameta/nvim-metals'
       },
       handlers = {
