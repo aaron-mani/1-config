@@ -25,16 +25,17 @@ glog() {
   remotes="remotes/origin"
   branch="$remotes/master" # default git branch
   dir="." # default project directory path
-  reports_team="bowen.lei|zhebin.zhang|rahul.bhardwaj|hy.nguyen|siddhant.sorann|siddhant-rbrk|swati.sapar|sean.kung"
+  reports_team="bowen.lei|leibks|zhebin.zhang|rahul.bhardwaj|hy.nguyen|siddhant.sorann|siddhant-rbrk|swati.sapar|sean.kung|rahulb1999"
   events_team="naimish.viradia|archit.gupta|srivardhan.annam|jordan.barkley|noah.solomon"
   reports=false
   events=false
+  author=""
   OPTIND=1
 
-  while getopts "hrec:b:d:" option; do
+  while getopts "hrea:c:b:d:" option; do
     case "${option}" in
-      h) # display help
-        echo "Usage: $0 [-h] [-r{c=5000}] [-e{c=5000}] [-c commits{10}] [-b branch{master}[..branch]] [-d directory{.}]" >&2
+        h) # display help
+          echo "Usage: $0 [-h] [-r(c=5000)] [-e(c=5000)] [-a <author>] [-c <commits>(10)] [-b <branch>(master)[..<branch>]] [-d <dir>(.)]" >&2
         return;;
       r) # filter reports team specific commits only
         reports=true
@@ -42,6 +43,8 @@ glog() {
       e) # filter events team specific commits only
         events=true
         commits="5000";;
+      a) # specific author
+        author=${OPTARG};;
       c) # number of commits to display
         commits=${OPTARG};;
       b) # get commit log for a specific branch or commit diff between branches
@@ -60,7 +63,7 @@ glog() {
       d) # directory path
         dir=${OPTARG};;
       *)
-        echo "Invalid arg! Usage: $0 [-h] [-r] [-c commits] [-b branch] [-d dir]" >&2
+        echo "Invalid arg! Usage: $0 [-h] [-r(c=5000)] [-e(c=5000)] [-a <author>] [-c <commits>(10)] [-b <branch>(master)[..<branch>]] [-d <dir>(.)]" >&2
         return;;
     esac
   done
@@ -82,6 +85,12 @@ glog() {
       --pretty=format:"%C(Yellow)%cd%Creset %Cgreen%h%Creset %<(50)%ae %s" \
       -n "$commits" "$branch" -- "$dir" \
       | egrep -i "$events_team"
+  elif [ ! -z "$author" ]; then
+    # git log --color=always \
+    git log \
+      --pretty=format:"%C(Yellow)%cd%Creset %Cgreen%h%Creset %<(50)%ae %s" \
+      -n "$commits" "$branch" -- "$dir" \
+      | egrep -i "$author"
   else
     #git log --color=always \
     git log \
