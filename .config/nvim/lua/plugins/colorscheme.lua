@@ -1,7 +1,8 @@
 return {
-  "rebelot/kanagawa.nvim",
-  priority = 1000, -- ensure to load this before all other plugins
-  config = function()
-    vim.cmd([[colorscheme kanagawa]])
-  end,
+    'AlexvZyl/nordic.nvim',
+    lazy = false,
+    priority = 1000,
+    config = function()
+        require('nordic').load()
+    end
 }
