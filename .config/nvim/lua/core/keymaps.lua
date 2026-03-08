@@ -1,15 +1,13 @@
--- set leader key space
-vim.g.mapleader = " "
-
 local keymap = vim.keymap
 
--- general keymaps
-keymap.set("n", "<leader><leader>", ":nohl<CR>", { desc = "Clear search highlighting" }) -- clear search highlights
+-- generic keymaps only
+keymap.set("n", "<Esc>", ":nohl<CR>", { desc = "Clear search highlighting" }) -- clear search highlights
 keymap.set("n", "<leader>|", "<C-w>v", { desc = "Split vertical" }) -- vertical split
 keymap.set("n", "<leader>-", "<C-w>s", { desc = "Split horizontal" }) -- horizontal split
 keymap.set("n", "<leader>=", "<C-w>=", { desc = "Split equal" }) -- make split windows equal width
 keymap.set("n", "<leader>x", ":close<CR>", { desc = "Split close" }) -- split window horizontally 
 
+--[[
 -- telescope
 local builtin = require('telescope.builtin')
 keymap.set('n', '<leader>ff', builtin.find_files, { desc = "Telescope: find files" })
@@ -33,3 +31,4 @@ vim.keymap.set("n", "<leader>1", function() ui.nav_file(1) end, { desc =  "Harpo
 vim.keymap.set("n", "<leader>2", function() ui.nav_file(2) end, { desc = "Harpoon: file 2" })
 vim.keymap.set("n", "<leader>3", function() ui.nav_file(3) end, { desc = "Harpoon: file 3" })
 vim.keymap.set("n", "<leader>4", function() ui.nav_file(4) end, { desc = "Harpoon: file 4" })
+]]
