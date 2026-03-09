@@ -1,7 +1,5 @@
-# Path exports
-# export PATH="/opt/homebrew/opt/curl/bin:/Users/Aaron.Mani/Library/Python/3.8/bin:$PATH"
-# export PATH="/opt/homebrew/opt/python@3.10/libexec/bin:$PATH"
-export LLN="ubuntu@aaron-mani-l01.colo.rubrik.com"
+# Source ~/.commonrc
+[ -f "$HOME/.commonrc" ] && source "$HOME/.commonrc"
 
 # https://rubrik.atlassian.net/wiki/spaces/SPARK/pages/2284716096/M1+MacBooks
 export PYENV_ROOT="$HOME/.pyenv"
@@ -14,10 +12,9 @@ if [ `machine` != arm64e ]; then
     exec arch -arm64 zsh
 fi
 
-if [ -f $HOME/.bash_aliases ]; then
-    . $HOME/.bash_aliases
-fi
+# if [ -f $HOME/.bash_aliases ]; then
+#     . $HOME/.bash_aliases
+# fi
 
 #Aliases
 alias lln="ssh -AX ubuntu@aaron-mani-l01.colo.rubrik.com"
-alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
