@@ -1,10 +1,45 @@
 # Path exports
 # export PATH="/opt/homebrew/opt/curl/bin:/Users/Aaron.Mani/Library/Python/3.8/bin:$PATH"
 # export PATH="/opt/homebrew/opt/python@3.10/libexec/bin:$PATH"
-export PATH="$HOME/Library/Python/3.9/bin:$PATH" 
 
-# Environment vars 
-export LLN="ubuntu@aaron-mani-l01.colo.rubrik.com"
+# OS specific configurations
+case "$(uname -s)" in
+  Darwin)
+    # macOS-specific
+    # export PATH="/opt/homebrew/bin:$PATH"
+    export LLN="ubuntu@aaron-mani-l02.colo.rubrik.com"
+    export PATH="$HOME/Library/Python/3.9/bin:$PATH" 
+    ;;
+  Linux)
+    # Linux-specific
+    # Disable timeout auto-logout
+    export TMOUT=
+    ;;
+esac
 
-#Aliases
+# Shell specific configurations
+if [ -n "$ZSH_VERSION" ]; then
+  # zsh-only config
+  alias zshrc="nvim $HOME/.zshrc"
+  alias lln="ssh -A ubuntu@aaron-mani-l02.colo.rubrik.com"
+elif [ -n "$BASH_VERSION" ]; then
+  # bash-only config
+  alias bashrc="nvim $HOME/.bashrc"
+fi
+
+# tmux
+# alias tmux="tmux -u"
+ 
+# Rubrik dev
+alias sdb="$HOME/0-workspace/sdmain/lab/sd_dev_box/sd_dev_box --sdmain_repo $HOME/0-workspace/sdmain"
+alias activate="source $HOME/0-workspace/sdmain/polaris/.buildenv/bin/activate"
+alias portal="$HOME/0-workspace/portal_client"
+alias cdsdm="cd $HOME/0-workspace/sdmain/"
+  
+# Manage dot files
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+alias commonrc="nvim $HOME/.commonrc"
+
+# Git
+alias gupdate="git remote update"
+alias gpull="git remote update; git pull"

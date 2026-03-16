@@ -5,20 +5,6 @@ alias sbash="source $HOME/.bash_aliases"
 alias vimrc="nvim $HOME/.vim/vimrc"
 alias etmux="nvim $HOME/.tmux.conf"
 
-# general
-alias tmux="tmux -u"
-
-# rubrik
-alias sdb="$HOME/0-workspace/sdmain/lab/sd_dev_box/sd_dev_box --sdmain_repo $HOME/0-workspace/sdmain"
-alias activate="source $HOME/0-workspace/sdmain/polaris/.buildenv/bin/activate"
-alias portal="$HOME/0-workspace/portal_client"
-
-# Disable timeout auto-logout
-export TMOUT=
-
-# git
-alias gupdate="git remote update"
-alias gpull="git remote update; git pull"
 
 glog() {
   commits="10" # default # commits to display
@@ -98,12 +84,3 @@ glog() {
       -n "$commits" "$branch" -- "$dir"
   fi
 }
-
-# repo for dotfiles
-# https://www.atlassian.com/git/tutorials/dotfiles
-alias cgit='/usr/bin/git --git-dir=$HOME/1-config/ --work-tree=$HOME'
-
-#Directories
-alias cdsdm="cd $HOME/0-workspace/sdmain/"
-alias cdnv="cd $HOME/.config/nvim"
-
