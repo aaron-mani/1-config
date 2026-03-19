@@ -13,6 +13,15 @@ return {
             j = "<Esc>", -- escape insert mode "kj"
           },
         },
+        c = { -- command mode
+          j = {
+            k = "<C-c>", -- escape insert mode "jk"
+            j = "<C-c>", -- escape insert mode "jj"
+          },
+          k = {
+            j = "<C-c>", -- escape insert mode "kj"
+          },
+        },
       },
     }
   end,
