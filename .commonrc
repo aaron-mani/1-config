@@ -27,9 +27,9 @@ elif [ -n "$BASH_VERSION" ]; then
   alias brc="nvim $HOME/.bashrc"
 fi
 
-# tmux
-# alias tmux="tmux -u"
- 
+# Common Claude config
+export CLAUDE_CODE_NO_FLICKER=1
+
 # Rubrik dev
 alias sdb="$HOME/0-workspace/sdmain/lab/sd_dev_box/sd_dev_box --sdmain_repo $HOME/0-workspace/sdmain"
 alias activate="source $HOME/0-workspace/sdmain/polaris/.buildenv/bin/activate"
