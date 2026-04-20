@@ -115,3 +115,8 @@ fi
 # lua
 export PATH=$PATH:/home/linuxbrew/.linuxbrew/Cellar/lua-language-server/3.7.0/bin
 
+#nvim
+export PATH="$PATH:/opt/nvim/"
+
+#claude
+export PATH="$HOME/.local/bin:$PATH"
